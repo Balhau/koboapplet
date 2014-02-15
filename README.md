@@ -1,11 +1,8 @@
-minimal-java-applet-maven
+Kobo Utility
 ==================
 
-A Minimal Java Applet built with Maven project.
+This is a java component that interacts with the Kobo database and retrieve meaningful data. Now this is coupled with an applet implementation that it
+will serve us to extract data from the device in a web application context
 
-How to. . .
-You can find all of the commands to test this in the commands.txt file.
 
-1. Create self-signed cert in a java keystore(.jks).
-2. Compile, package, and sign your artifacts.
-3. Test with appletviewer.
+
