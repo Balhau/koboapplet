@@ -4,7 +4,7 @@ package com.balhau.kobo.test;
 import java.util.List;
 
 import com.balhau.kobo.device.DeviceUtils;
-import com.balhau.kobo.sql.IKoboDatabase;
+import com.balhau.kobo.interfaces.IKoboDatabase;
 import com.balhau.kobo.sql.KoboSQLite;
 import com.balhau.kobo.utils.KoboConfig;
 import com.balhau.kobo.utils.KoboProp;
@@ -19,12 +19,12 @@ public class app1 {
 //		      Class.forName(SQLITE_JDBC);
 			  List<String> dev=DeviceUtils.getDevicesInfo();
 			  IKoboDatabase db=new KoboSQLite(dev.get(0)+"/"+KoboConfig.DEFAULT_DIR.getValue()+"/"+KoboConfig.SQLLITE_DATABASE.getValue());
+			  System.out.println(dev.get(0)+"/"+KoboConfig.DEFAULT_DIR.getValue()+"/"+KoboConfig.SQLLITE_DATABASE.getValue());
 			  System.out.println("Kobo Database Version:" +db.getVersion());
 			  System.out.println(db);
 			  System.out.println(DeviceUtils.getDevicesInfo());
 //		      Connection c = DriverManager.getConnection("jdbc:sqlite:test.db");
 		      System.out.println("Opened database successfully");
-		      
 		      System.out.println(System.getProperty("kobo.default.dir"));
 //		      stmt = c.createStatement();
 //		      String sql = "CREATE TABLE COMPANY " +

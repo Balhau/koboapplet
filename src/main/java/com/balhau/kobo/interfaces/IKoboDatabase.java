@@ -1,4 +1,4 @@
-package com.balhau.kobo.sql;
+package com.balhau.kobo.interfaces;
 
 import java.sql.SQLException;
 
