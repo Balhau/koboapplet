@@ -10,6 +10,6 @@ import java.util.List;
 public interface IKoboAPI {
 	
 	int getDatabaseVersion();
-	List<String> getDetectedDevices();
-	
+	String getDetectedDevices();
+	String getCurrentReadings();
 }

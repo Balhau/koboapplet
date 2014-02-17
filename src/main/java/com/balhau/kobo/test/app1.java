@@ -8,6 +8,7 @@ import com.balhau.kobo.interfaces.IKoboDatabase;
 import com.balhau.kobo.sql.KoboSQLite;
 import com.balhau.kobo.utils.KoboConfig;
 import com.balhau.kobo.utils.KoboProp;
+import com.google.gson.Gson;
 
 public class app1 {
 	
@@ -18,6 +19,9 @@ public class app1 {
 //			  System.out.println(KoboProp.CONFIG_PROPS.getProperty("kobo.default.dir"));
 //		      Class.forName(SQLITE_JDBC);
 			  List<String> dev=DeviceUtils.getDevicesInfo();
+			  Gson gson = new Gson();
+			  System.out.println(gson.toJson(dev));
+			  
 			  IKoboDatabase db=new KoboSQLite(dev.get(0)+"/"+KoboConfig.DEFAULT_DIR.getValue()+"/"+KoboConfig.SQLLITE_DATABASE.getValue());
 			  System.out.println(dev.get(0)+"/"+KoboConfig.DEFAULT_DIR.getValue()+"/"+KoboConfig.SQLLITE_DATABASE.getValue());
 			  System.out.println("Kobo Database Version:" +db.getVersion());
