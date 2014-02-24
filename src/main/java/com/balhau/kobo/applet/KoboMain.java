@@ -43,7 +43,7 @@ public class KoboMain extends Applet implements IKoboAPI{
 	public int getDatabaseVersion() {
 		try {
 			return koboDatabase.getVersion();
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			System.out.println("Error connecting database");
 		}
 		return -1;
@@ -58,7 +58,7 @@ public class KoboMain extends Applet implements IKoboAPI{
 		Gson gson=new Gson();
 		try {
 			return gson.toJson(koboDatabase.getCurrentReadings());
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return "";

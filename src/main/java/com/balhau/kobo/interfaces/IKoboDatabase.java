@@ -3,6 +3,8 @@ package com.balhau.kobo.interfaces;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.balhau.kobo.exceptions.KoboSQLException;
+import com.balhau.kobo.model.KoboAchievement;
 import com.balhau.kobo.model.KoboBook;
 
 /**
@@ -11,8 +13,11 @@ import com.balhau.kobo.model.KoboBook;
  * <p>15 de Fev de 2014</p>
  */
 public interface IKoboDatabase {
-	public int getVersion() throws SQLException;
-	public List<KoboBook> getCurrentReadings() throws SQLException;
-	public List<KoboBook> getReadedBooks() throws SQLException;
+	public int getVersion() throws KoboSQLException;
+	public List<KoboBook> getCurrentReadings() throws KoboSQLException;
+	public List<KoboBook> getReadedBooks() throws KoboSQLException;
+	public List<String> getAllBookNames() throws KoboSQLException;
+	public List<KoboAchievement> getAchievements() throws KoboSQLException;
+	public KoboBook fromBookTitle(String bookTitle) throws KoboSQLException;
 	
 }
