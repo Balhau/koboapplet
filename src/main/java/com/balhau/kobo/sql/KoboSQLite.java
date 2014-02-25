@@ -19,6 +19,7 @@ import com.balhau.kobo.model.KoboBook;
  * <p>15 de Fev de 2014</p>
  */
 public class KoboSQLite implements IKoboDatabase{
+	
 	private String databasePath;
 	private final String SQLITE_JDBC="org.sqlite.JDBC";
 	private final String SQLITE_CON_PREFIX="jdbc:sqlite:";
@@ -66,9 +67,18 @@ public class KoboSQLite implements IKoboDatabase{
 	}
 
 
-	public List<KoboBook> getReadedBooks() throws KoboSQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<String> getReadingBookNames() throws KoboSQLException {
+		try{
+			List<String> bookNames=new ArrayList<String>();
+			Statement st=conn.createStatement();
+			ResultSet rs=st.executeQuery("select distinct C.BookTitle from  (select distinct contentID from content where ___PercentRead <> 0) as D inner join content as C on C.contentID LIKE '%'||D.contentID||'%';");
+			while(rs.next()){
+				bookNames.add(rs.getString(1));
+			}
+			return bookNames;
+		}catch (Exception e) {
+			throw new KoboSQLException(e);
+		}
 	}
 
 

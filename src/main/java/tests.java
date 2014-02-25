@@ -13,8 +13,9 @@ public class tests {
 		 List<String> ldv=DeviceUtils.getDevicesInfo();
 		 IKoboDatabase koboDatabase=new KoboSQLite(DeviceUtils.getSQLitePathFromKoboPath(ldv.get(0)));
 		 List<String> books=koboDatabase.getAllBookNames();
-		 for(String book: books){
-			 System.out.println(book);
-		 }
+		 for(String book: books) System.out.println(book);
+		 
+		 List<String> rBooks=koboDatabase.getReadingBookNames();
+		 for(String book: rBooks) System.out.println(book);
 	}
 }
