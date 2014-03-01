@@ -14,10 +14,10 @@ import com.balhau.kobo.model.KoboBook;
 public interface IKoboDatabase {
 	public int getVersion() throws KoboSQLException;
 	public List<KoboBook> getCurrentReadings() throws KoboSQLException;
-	public List<String> getReadingBookContentID() throws KoboSQLException;
+	public List<String> getReadingBooksContentID() throws KoboSQLException;
 	public List<String> getReadingBookIDs() throws KoboSQLException;
 	public KoboBook getBookByContentID(String contentID) throws KoboSQLException;
-	public KoboBook getBookByName(String name) throws KoboSQLException;
+	public List<KoboBook> getBooksByName(String name) throws KoboSQLException;
 	public List<KoboAchievement> getAchievements() throws KoboSQLException;
 	public void exportToDatabase(IDBExporter dbexporter) throws KoboSQLException;
 	

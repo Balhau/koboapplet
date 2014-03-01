@@ -40,7 +40,7 @@ class KoboDatabaseTest extends Specification {
 			version==92
 	}
 	
-	def "Get reading books"(){
+	def "Get reading books IDs"(){
 		when:
 			List rb=kdb.getReadingBookIDs()
 		then:
@@ -53,7 +53,14 @@ class KoboDatabaseTest extends Specification {
 		then:
 			book.getPercentageReaded()==55;
 			book.getBookTitle().equals("Implementing SSL / TLS Using Cryptography and PKI")
+			book.getContentType().equals(9)
+			book.getMimeType().equals("application/pdf")
 	}
 	
-	
+	def "Get Books By Name"(){
+		when:
+			List books=kdb.getBooksByName("SSL")
+		then:
+			books.size()==6
+	}
 }

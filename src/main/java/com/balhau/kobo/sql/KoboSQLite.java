@@ -57,9 +57,9 @@ public class KoboSQLite implements IKoboDatabase{
 		try{
 			Statement st=conn.createStatement();
 			ArrayList<KoboBook> res=new ArrayList<KoboBook>();
-			ResultSet rs=st.executeQuery("select distinct C.BookTitle,Filter.___PercentRead from content as C, (select ContentID ,BookTitle,___PercentRead from content   where ___PercentRead <> 0) as Filter where C.ContentID like Filter.ContentID||'%' limit 0,10");
-			while(rs.next()){
-				res.add(new KoboBook(rs.getString(1), "",rs.getInt(2)));
+			List<String> rIDS=getReadingBookIDs();
+			for(String cid : rIDS){
+				res.add(getBookByContentID(cid));
 			}
 			return res;
 		}catch (Exception e) {
@@ -117,7 +117,6 @@ public class KoboSQLite implements IKoboDatabase{
 
 	public void exportToDatabase(IDBExporter dbexporter)
 			throws KoboSQLException {
-		// TODO Auto-generated method stub	
 	}
 
 
@@ -133,7 +132,7 @@ public class KoboSQLite implements IKoboDatabase{
 	}
 
 
-	public List<String> getReadingBookContentID() throws KoboSQLException {
+	public List<String> getReadingBooksContentID() throws KoboSQLException {
 		try{
 			Statement st=conn.createStatement();
 			List<String> readingBooks=new ArrayList<String>();
@@ -150,12 +149,25 @@ public class KoboSQLite implements IKoboDatabase{
 	private int percentReadByContentID(String contentID){
 		try{
 			Statement st=conn.createStatement();
-			ResultSet rs=st.executeQuery("select ___PercentRead from content where contentID like '%"+contentID+"%' and ___PercentRead <>");
+			ResultSet rs=st.executeQuery("select ___PercentRead from content where contentID like '%"+contentID+"%' and ___PercentRead <> 0");
 			if(rs.next()) return rs.getInt(1);
 		}catch (Exception e) {
 			return 0;
 		}
 		return 0;
+	}
+	
+	private void infoKoboBook(String contentID,KoboBook book) throws KoboSQLException{
+		try{
+			Statement st=conn.createStatement();
+			ResultSet rs=st.executeQuery("select * from content where contentID like '%"+contentID+"%'");
+			if(rs.next()){
+				book.setContentType(rs.getInt(2));
+				book.setMimeType(rs.getString(3));
+			}
+		}catch (Exception e) {
+			throw new KoboSQLException(e);
+		}
 	}
 
 	public KoboBook getBookByContentID(String contentID) throws KoboSQLException {
@@ -164,6 +176,7 @@ public class KoboSQLite implements IKoboDatabase{
 			kb.setPercentageReaded(percentReadByContentID(contentID));
 			kb.setBookID(contentID);
 			kb.setBookTitle(getBookTitleByContentID(contentID));
+			infoKoboBook(contentID, kb);
 			return kb;
 		}catch (Exception e) {
 			throw new KoboSQLException(e);
@@ -171,9 +184,22 @@ public class KoboSQLite implements IKoboDatabase{
 	}
 
 
-	public KoboBook getBookByName(String name) throws KoboSQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<KoboBook> getBooksByName(String name) throws KoboSQLException {
+		try{
+			Statement st=conn.createStatement();
+			ResultSet rs=st.executeQuery("select contentID,BookTitle from content where BookTitle like '%"+name+"%' group by BookTitle;");
+			List<KoboBook> kb=new ArrayList<KoboBook>();
+			List<String> ids=new ArrayList<String>();
+			while(rs.next()){
+				ids.add(rs.getString(1));
+			}
+			for(String id: ids){
+				kb.add(getBookByContentID(id));
+			}
+			return kb;
+		}catch (Exception e) {
+			throw new KoboSQLException(e);
+		}
 	}
 	
 }
