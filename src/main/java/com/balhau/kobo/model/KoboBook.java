@@ -17,7 +17,7 @@ public class KoboBook {
 	public KoboBook(String bookTitle, String bookID,int percentageReaded) {
 		this.bookTitle = bookTitle;
 		this.bookID = bookID;
-		this.percentageReaded=percentageReaded;
+		this.setPercentageReaded(percentageReaded);
 	}
 
 	public String getBookTitle() {
@@ -34,6 +34,14 @@ public class KoboBook {
 
 	public void setBookID(String bookID) {
 		this.bookID = bookID;
+	}
+
+	public int getPercentageReaded() {
+		return percentageReaded;
+	}
+
+	public void setPercentageReaded(int percentageReaded) {
+		this.percentageReaded = percentageReaded;
 	}
 	
 	

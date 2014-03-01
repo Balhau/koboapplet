@@ -6,5 +6,6 @@ package com.balhau.kobo.interfaces;
  * <p>25 de Fev de 2014</p>
  */
 public interface IDBExporter {
-	public void exportFromKoboDB();
+	public void importKoboData();
+	public String generateKoboSqlTables();
 }

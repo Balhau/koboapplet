@@ -1,6 +1,5 @@
 package com.balhau.kobo.interfaces;
 
-import java.util.List;
 
 /**
  * This will represent all the exportable methods the KoboAPI should implement

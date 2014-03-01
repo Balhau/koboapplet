@@ -1,6 +1,5 @@
 package com.balhau.kobo.exceptions;
 
-@SuppressWarnings("serial")
 public class KoboSQLException extends Exception{
 
 	/**
