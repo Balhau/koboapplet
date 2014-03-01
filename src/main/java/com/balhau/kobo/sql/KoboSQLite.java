@@ -162,11 +162,19 @@ public class KoboSQLite implements IKoboDatabase{
 	private void infoKoboBook(String contentID,KoboBook book) throws KoboSQLException{
 		try{
 			PreparedStatement pst=conn.prepareStatement("select * from content where contentID like ? and BookTitle <>''");
-			pst.setString(1, "%"+contentID+"%");
+			String lq="%"+contentID+"%";
+			pst.setString(1, lq);
 			ResultSet rs=pst.executeQuery();
 			if(rs.next()){
 				book.setContentType(rs.getInt(2));
 				book.setMimeType(rs.getString(3));
+				PreparedStatement pst2=conn.prepareStatement("select * from content where contentID like ? and ContentType ==6");
+				pst2.setString(1, lq);
+				ResultSet rs2=pst2.executeQuery();
+				if(rs2.next()){
+					String st=rs2.getString(15);
+					book.setDateLastRead(st);
+				}
 			}
 		}catch (Exception e) {
 			throw new KoboSQLException(e);
@@ -189,8 +197,9 @@ public class KoboSQLite implements IKoboDatabase{
 
 	public List<KoboBook> getBooksByName(String name) throws KoboSQLException {
 		try{
-			Statement st=conn.createStatement();
-			ResultSet rs=st.executeQuery("select contentID,BookTitle from content where BookTitle like '%"+name+"%' group by BookTitle;");
+			PreparedStatement pst=conn.prepareStatement("select contentID,BookTitle from content where BookTitle like ? group by BookTitle;");
+			pst.setString(1, "%"+name+"%");
+			ResultSet rs=pst.executeQuery();
 			List<KoboBook> kb=new ArrayList<KoboBook>();
 			List<String> ids=new ArrayList<String>();
 			while(rs.next()){

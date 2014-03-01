@@ -2,17 +2,13 @@ package com.balhau.kobo.applet;
 
 import java.applet.Applet;
 import java.awt.Graphics;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import com.balhau.kobo.device.DeviceUtils;
 import com.balhau.kobo.exceptions.KoboSQLException;
 import com.balhau.kobo.interfaces.IKoboAPI;
 import com.balhau.kobo.interfaces.IKoboDatabase;
-import com.balhau.kobo.model.KoboBook;
 import com.balhau.kobo.sql.KoboSQLite;
-import com.balhau.kobo.utils.KoboConfig;
 import com.google.gson.Gson;
 
 
@@ -20,14 +16,17 @@ import com.google.gson.Gson;
  
 public class KoboMain extends Applet implements IKoboAPI{
 	
-	 private IKoboDatabase koboDatabase;
+	 /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private IKoboDatabase koboDatabase;
 	 private List<String> detectedDevices;
 	 
 	 public void init(){
 		 try{
 			 detectedDevices=DeviceUtils.getDevicesInfo();
 			 List<String> ldv=DeviceUtils.getDevicesInfo();
-			 String dbpath=ldv.get(0)+"/"+KoboConfig.SQLLITE_DATABASE.getValue();
 			 System.out.println(DeviceUtils.getSQLitePathFromKoboPath(ldv.get(0)));
 			 System.out.println("DEVICE: "+DeviceUtils.getSQLitePathFromKoboPath(ldv.get(0)));
 			 koboDatabase=new KoboSQLite(DeviceUtils.getSQLitePathFromKoboPath(ldv.get(0)));
@@ -69,6 +68,10 @@ public class KoboMain extends Applet implements IKoboAPI{
 
 	public String getBookByContentID(String contentID) throws KoboSQLException{
 		return exportJSON(koboDatabase.getBookByContentID(contentID));
+	}
+
+	public String getAchievements() throws KoboSQLException {
+		return exportJSON(koboDatabase.getAchievements());
 	}
 
 } 

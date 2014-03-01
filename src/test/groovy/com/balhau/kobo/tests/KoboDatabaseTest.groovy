@@ -13,6 +13,7 @@ import com.balhau.kobo.sql.KoboSQLite
 class KoboDatabaseTest extends Specification {
 	
 	private IKoboDatabase kdb
+	private String concurencyBook="file:///mnt/sd/Subramaniam, Venkat/Programming Concurrency on the JVM (for jay muratore) - Venkat Subramaniam.epub"
 	
 	def setup(){
 		List<String> ldv=DeviceUtils.getDevicesInfo();
@@ -69,5 +70,13 @@ class KoboDatabaseTest extends Specification {
 			List books=kdb.getCurrentReadings()
 		then:
 			books.size()==94
+	}
+	
+	def "Check last date read from Ebook Entry"(){
+		when:
+			KoboBook book=kdb.getBookByContentID(concurencyBook)
+		then:
+			String lastread=book.getDateLastRead()
+			lastread.equals("2013-11-27T11:38:08Z");
 	}
 }

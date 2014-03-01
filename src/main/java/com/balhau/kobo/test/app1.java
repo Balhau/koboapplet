@@ -7,7 +7,6 @@ import com.balhau.kobo.device.DeviceUtils;
 import com.balhau.kobo.interfaces.IKoboDatabase;
 import com.balhau.kobo.sql.KoboSQLite;
 import com.balhau.kobo.utils.KoboConfig;
-import com.balhau.kobo.utils.KoboProp;
 import com.google.gson.Gson;
 
 public class app1 {

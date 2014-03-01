@@ -1,5 +1,6 @@
 package com.balhau.kobo.model;
 
+
 /**
  * Content class to hold information about a book stored in kobo reader
  * @author <a href="mailto:balhau@balhau.net">Balhau</a>
@@ -11,6 +12,7 @@ public class KoboBook {
 	private int contentType;
 	private String mimeType;
 	private int percentageReaded;
+	private String dateLastRead;
 	
 	public KoboBook(){
 		
@@ -22,6 +24,7 @@ public class KoboBook {
 		this.contentType=contentType;
 		this.mimeType=mimeType;
 		this.percentageReaded=percentageReaded;
+		this.setDateLastRead(null);
 	}
 
 	public String getBookTitle() {
@@ -62,6 +65,14 @@ public class KoboBook {
 
 	public void setMimeType(String mimeType) {
 		this.mimeType = mimeType;
+	}
+
+	public String getDateLastRead() {
+		return dateLastRead;
+	}
+
+	public void setDateLastRead(String dateLastRead) {
+		this.dateLastRead = dateLastRead;
 	}
 	
 	

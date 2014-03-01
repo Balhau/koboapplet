@@ -15,4 +15,5 @@ public interface IKoboAPI {
 	String getCurrentReadings() throws KoboSQLException;
 	String getCurrentReadingsIDs() throws KoboSQLException;
 	String getBookByContentID(String contentID) throws KoboSQLException;
+	String getAchievements() throws KoboSQLException;
 }
