@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.balhau.kobo.device.DeviceUtils;
+import com.balhau.kobo.exceptions.KoboSQLException;
 import com.balhau.kobo.interfaces.IKoboAPI;
 import com.balhau.kobo.interfaces.IKoboDatabase;
 import com.balhau.kobo.model.KoboBook;
@@ -35,6 +36,11 @@ public class KoboMain extends Applet implements IKoboAPI{
 			 System.out.println("Init Applet Error: "+e.getMessage());
 		}
 	 }
+	 
+	 private String exportJSON(Object data){
+		 Gson gson=new Gson();
+		 return gson.toJson(data);
+	 }
 	
 	 public void paint(Graphics g) {
 	        g.drawString("Heil Joseph!", 50, 25);
@@ -50,18 +56,19 @@ public class KoboMain extends Applet implements IKoboAPI{
 	}
 
 	public String getDetectedDevices() {
-		Gson gson = new Gson();
-		return gson.toJson(detectedDevices); 
+		return exportJSON(detectedDevices); 
 	}
 
-	public String getCurrentReadings() {
-		Gson gson=new Gson();
-		try {
-			return gson.toJson(koboDatabase.getCurrentReadings());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return "";
+	public String getCurrentReadings() throws KoboSQLException{
+		return exportJSON(koboDatabase.getCurrentReadings());
+	}
+
+	public String getCurrentReadingsIDs() throws KoboSQLException {
+		return exportJSON(koboDatabase.getReadingBookIDs());
+	}
+
+	public String getBookByContentID(String contentID) throws KoboSQLException{
+		return exportJSON(koboDatabase.getBookByContentID(contentID));
 	}
 
 } 

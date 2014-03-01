@@ -63,4 +63,11 @@ class KoboDatabaseTest extends Specification {
 		then:
 			books.size()==6
 	}
+	
+	def "Get current readings"(){
+		when:
+			List books=kdb.getCurrentReadings()
+		then:
+			books.size()==94
+	}
 }

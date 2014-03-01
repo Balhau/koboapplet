@@ -2,6 +2,7 @@ package com.balhau.kobo.sql;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -55,7 +56,6 @@ public class KoboSQLite implements IKoboDatabase{
 
 	public List<KoboBook> getCurrentReadings() throws KoboSQLException{
 		try{
-			Statement st=conn.createStatement();
 			ArrayList<KoboBook> res=new ArrayList<KoboBook>();
 			List<String> rIDS=getReadingBookIDs();
 			for(String cid : rIDS){
@@ -122,10 +122,11 @@ public class KoboSQLite implements IKoboDatabase{
 
 	private String getBookTitleByContentID(String contentID) throws KoboSQLException {
 		try{
-			Statement st=conn.createStatement();
-			ResultSet rs=st.executeQuery("select distinct(BookTitle) from content where  contentID like '%"+contentID+"%' and BookTitle<>'';");
-			rs.next();
-			return rs.getString(1);
+			PreparedStatement pst=conn.prepareStatement("select distinct(BookTitle) from content where contentID like ? and BookTitle<>''");
+			pst.setString(1, "%"+contentID+"%");
+			ResultSet rs=pst.executeQuery();
+			if(rs.next())	return rs.getString(1);
+			return null;
 		}catch (Exception e) {
 			throw new KoboSQLException(e);
 		}
@@ -148,8 +149,9 @@ public class KoboSQLite implements IKoboDatabase{
 
 	private int percentReadByContentID(String contentID){
 		try{
-			Statement st=conn.createStatement();
-			ResultSet rs=st.executeQuery("select ___PercentRead from content where contentID like '%"+contentID+"%' and ___PercentRead <> 0");
+			PreparedStatement pst=conn.prepareStatement("select ___PercentRead from content where contentID like ? and ___PercentRead <> 0;");
+			pst.setString(1, contentID);
+			ResultSet rs=pst.executeQuery();
 			if(rs.next()) return rs.getInt(1);
 		}catch (Exception e) {
 			return 0;
@@ -159,8 +161,9 @@ public class KoboSQLite implements IKoboDatabase{
 	
 	private void infoKoboBook(String contentID,KoboBook book) throws KoboSQLException{
 		try{
-			Statement st=conn.createStatement();
-			ResultSet rs=st.executeQuery("select * from content where contentID like '%"+contentID+"%'");
+			PreparedStatement pst=conn.prepareStatement("select * from content where contentID like ? and BookTitle <>''");
+			pst.setString(1, "%"+contentID+"%");
+			ResultSet rs=pst.executeQuery();
 			if(rs.next()){
 				book.setContentType(rs.getInt(2));
 				book.setMimeType(rs.getString(3));

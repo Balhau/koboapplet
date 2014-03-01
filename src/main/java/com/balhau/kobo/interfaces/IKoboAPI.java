@@ -1,5 +1,7 @@
 package com.balhau.kobo.interfaces;
 
+import com.balhau.kobo.exceptions.KoboSQLException;
+
 
 /**
  * This will represent all the exportable methods the KoboAPI should implement
@@ -8,7 +10,9 @@ package com.balhau.kobo.interfaces;
  */
 public interface IKoboAPI {
 	
-	int getDatabaseVersion();
-	String getDetectedDevices();
-	String getCurrentReadings();
+	int getDatabaseVersion() throws KoboSQLException;
+	String getDetectedDevices() throws KoboSQLException;
+	String getCurrentReadings() throws KoboSQLException;
+	String getCurrentReadingsIDs() throws KoboSQLException;
+	String getBookByContentID(String contentID) throws KoboSQLException;
 }

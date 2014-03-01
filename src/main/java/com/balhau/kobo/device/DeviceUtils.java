@@ -29,12 +29,10 @@ public class DeviceUtils {
 		File dev;
 		List<String> devs=new ArrayList<String>();
 		String devinfo;
-		System.out.println("Directory: "+media.isDirectory());
 		String[] mounted=media.list();
 		for(int i=0;i<mounted.length;i++){
 			devinfo=KoboConfig.DEFAULT_MOUNT_POINT.getValue()+"/"+mounted[i]+"/"+KoboConfig.DEFAULT_DIR.getValue();
 			dev=new File(devinfo);
-			System.out.println("Exists "+devinfo+": "+dev.exists());
 			if(dev.exists()){
 				devs.add(ROOTMOUNT+"/"+mounted[i]);
 			}
