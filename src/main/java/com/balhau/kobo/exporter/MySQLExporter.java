@@ -10,6 +10,22 @@ import com.balhau.kobo.interfaces.IDBExporter;
 public class MySQLExporter implements IDBExporter{
 
 	private String dbName;
+	public String getDbName() {
+		return dbName;
+	}
+
+	public String getUser() {
+		return user;
+	}
+
+	public String getPass() {
+		return pass;
+	}
+
+	public String getHost() {
+		return host;
+	}
+
 	private String user;
 	private String pass;
 	private String host;
