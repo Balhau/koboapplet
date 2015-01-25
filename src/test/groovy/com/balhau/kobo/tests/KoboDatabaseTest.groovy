@@ -12,6 +12,7 @@ import com.balhau.kobo.interfaces.IKoboDatabase
 import com.balhau.kobo.model.Bookmark;
 import com.balhau.kobo.model.KoboAchievement;
 import com.balhau.kobo.model.KoboBook;
+import com.balhau.kobo.model.Rating;
 import com.balhau.kobo.sql.KoboSQLite
 
 class KoboDatabaseTest extends Specification {
@@ -104,6 +105,13 @@ class KoboDatabaseTest extends Specification {
 			List<String> bookIds=kdb.getBooksIds();
 		then:
 			Assert.assertEquals(bookIds.size(),1781);
+	}
+	
+	def "Get Ratings"(){
+		when:
+			List<Rating> ratings=kdb.getRatings();
+		then:
+			Assert.assertEquals(ratings.size(),14);
 	}
 }
 

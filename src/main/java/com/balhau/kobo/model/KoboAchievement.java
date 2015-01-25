@@ -11,7 +11,7 @@ public class KoboAchievement implements BaseModel{
 	private String completeDescription;
 	private String eventLogDescription;
 	private String incompleteDescription;
-	private Date dateCreated;
+	private String dateCreated;
 	private String imageId;
 	private String name;
 	private int percentComplete;
@@ -21,7 +21,7 @@ public class KoboAchievement implements BaseModel{
 	
 	public KoboAchievement(String completeDescription,
 			String eventLogDescription, String incompleteDescription,
-			Date dateCreated, String imageId, String name, int percentComplete,
+			String dateCreated, String imageId, String name, int percentComplete,
 			String userID) {
 		this.completeDescription = completeDescription;
 		this.eventLogDescription = eventLogDescription;
@@ -51,10 +51,10 @@ public class KoboAchievement implements BaseModel{
 	public void setIncompleteDescription(String incompleteDescription) {
 		this.incompleteDescription = incompleteDescription;
 	}
-	public Date getDateCreated() {
+	public String getDateCreated() {
 		return dateCreated;
 	}
-	public void setDateCreated(Date dateCreated) {
+	public void setDateCreated(String dateCreated) {
 		this.dateCreated = dateCreated;
 	}
 	public String getImageId() {

@@ -6,6 +6,7 @@ import com.balhau.kobo.exceptions.KoboSQLException;
 import com.balhau.kobo.model.Bookmark;
 import com.balhau.kobo.model.KoboAchievement;
 import com.balhau.kobo.model.KoboBook;
+import com.balhau.kobo.model.Rating;
 
 /**
  * Interface that all KoboDatabase implementations should respect
@@ -28,5 +29,5 @@ public interface IKoboDatabase {
 	 * @throws KoboSQLException 
 	 */
 	public List<Bookmark> getBookmarks() throws KoboSQLException;
-	
+	public List<Rating> getRatings() throws KoboSQLException;
 }

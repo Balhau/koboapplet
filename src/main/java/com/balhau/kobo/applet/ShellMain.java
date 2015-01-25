@@ -6,6 +6,7 @@ import com.balhau.kobo.device.DeviceUtils;
 import com.balhau.kobo.interfaces.IKoboDatabase;
 import com.balhau.kobo.model.Bookmark;
 import com.balhau.kobo.model.KoboAchievement;
+import com.balhau.kobo.model.Rating;
 import com.balhau.kobo.sql.KoboSQLite;
 
 import static java.lang.System.out;
@@ -51,9 +52,16 @@ public class ShellMain {
 			out.println(bookId);
 		});
 		
+		List<Rating> ratings=aux.getRatings();
+		
+		callOn(ratings,(Rating r) -> {
+			out.println(r.toJson());
+		});
+		
 		out.println("Achievments: "+ach.size());
 		out.println("Bookmarks: "+bmarks.size());
 		out.println("Book Ids: "+bids.size());
+		out.println("Ratings: "+ratings.size());
 		
 	}
 }

@@ -9,7 +9,7 @@ import java.util.Date;
  */
 public class Shelf implements BaseModel{
 	
-	private Date creationDate;
+	private String creationDate;
 	private String id;
 	private String internalName;
 	private String lastModified;
@@ -25,11 +25,11 @@ public class Shelf implements BaseModel{
 		
 	}
 
-	public Date getCreationDate() {
+	public String getCreationDate() {
 		return creationDate;
 	}
 
-	public void setCreationDate(Date creationDate) {
+	public void setCreationDate(String creationDate) {
 		this.creationDate = creationDate;
 	}
 

@@ -15,6 +15,7 @@ import com.balhau.kobo.interfaces.IKoboDatabase;
 import com.balhau.kobo.model.Bookmark;
 import com.balhau.kobo.model.KoboAchievement;
 import com.balhau.kobo.model.KoboBook;
+import com.balhau.kobo.model.Rating;
 
 /**
  * Implementation of {@link IKoboDatabase}. This is a implementation to kobo sqlite database
@@ -114,7 +115,7 @@ public class KoboSQLite implements IKoboDatabase{
 			ResultSet rs=st.executeQuery("select CompleteDescription, EventLogDescription,IncompleteDescription,DateCreated,ImageId,Name,PercentComplete,UserId from Achievement;");
 			while(rs.next()){
 				achievements.add(new KoboAchievement(
-						rs.getString(1), rs.getString(2), rs.getString(3), rs.getDate(4), rs.getString(5), 
+						rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), 
 						rs.getString(6), rs.getInt(7), rs.getString(8)));
 			}
 			return achievements;
@@ -243,15 +244,15 @@ public class KoboSQLite implements IKoboDatabase{
 				aux.setText(rs.getString(10));
 				aux.setAnnotation(rs.getString(11));
 				aux.setExtraAnnotation(rs.getString(12));
-				aux.setDateCreated(rs.getDate(13));
+				aux.setDateCreated(rs.getString(13));
 				aux.setChapterProgress(rs.getDouble(14));
 				aux.setHidden(rs.getBoolean(15));
 				aux.setVersion(rs.getString(16));
-				aux.setDateModified(rs.getDate(17));
+				aux.setDateModified(rs.getString(17));
 				aux.setCreator(rs.getString(18));
 				aux.setUuid(rs.getString(19));
 				aux.setUserId(rs.getString(20));
-				aux.setSyncTime(rs.getDate(21));
+				aux.setSyncTime(rs.getString(21));
 				aux.setPublished(rs.getBoolean(22));
 				bookmarks.add(aux);
 			}
@@ -278,8 +279,30 @@ public class KoboSQLite implements IKoboDatabase{
 		}catch(Exception ex){ throw new KoboSQLException(ex.getMessage());}
 	}
 	
+	
+	
+	@Override
+	public List<Rating> getRatings() throws KoboSQLException {
+		List<Rating> ratings=new ArrayList<Rating>();
+		try{
+			ResultSet res=query("select * from ratings");
+			Rating r;
+			while(res.next()){
+				r=new Rating();
+				r.setContentId(res.getString(1));
+				r.setRating(res.getInt(2));
+				r.setReview(res.getString(3));
+				r.setDateModified(res.getString(4));
+				ratings.add(r);
+			}
+			return ratings;
+		}catch(Exception ex){throw new KoboSQLException(ex.getMessage());}
+	}
+
+
 	private ResultSet query(String sqlQuery) throws Exception{
 		Statement st=conn.createStatement();
 		return st.executeQuery(sqlQuery);
 	}
+	
 }

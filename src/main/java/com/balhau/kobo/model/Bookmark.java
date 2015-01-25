@@ -15,15 +15,15 @@ public class Bookmark implements BaseModel{
 	private String text;
 	private String annotation;
 	private String extraAnnotation;
-	private Date dateCreated;
+	private String dateCreated;
 	private double chapterProgress;
 	private boolean hidden;
 	private String version;
-	private Date dateModified;
+	private String dateModified;
 	private String creator;
 	private String uuid;
 	private String userId;
-	private Date syncTime;
+	private String syncTime;
 	private boolean published;
 	
 	public Bookmark(){
@@ -126,11 +126,11 @@ public class Bookmark implements BaseModel{
 		this.extraAnnotation = extraAnnotation;
 	}
 
-	public Date getDateCreated() {
+	public String getDateCreated() {
 		return dateCreated;
 	}
 
-	public void setDateCreated(Date dateCreated) {
+	public void setDateCreated(String dateCreated) {
 		this.dateCreated = dateCreated;
 	}
 
@@ -158,11 +158,11 @@ public class Bookmark implements BaseModel{
 		this.version = version;
 	}
 
-	public Date getDateModified() {
+	public String getDateModified() {
 		return dateModified;
 	}
 
-	public void setDateModified(Date dateModified) {
+	public void setDateModified(String dateModified) {
 		this.dateModified = dateModified;
 	}
 
@@ -190,11 +190,11 @@ public class Bookmark implements BaseModel{
 		this.userId = userId;
 	}
 
-	public Date getSyncTime() {
+	public String getSyncTime() {
 		return syncTime;
 	}
 
-	public void setSyncTime(Date syncTime) {
+	public void setSyncTime(String syncTime) {
 		this.syncTime = syncTime;
 	}
 
