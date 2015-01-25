@@ -18,3 +18,8 @@ The functionalities that are exposed to JavaScript are those described in the in
     	String getAchievements() throws KoboSQLException;
     	String getBookmarks() throws KoboSQLException;
     }
+
+
+###Note
+
+This code has features of Java 8 so you must download the latest version of the JDK from Oracle to build this code.
