@@ -53,6 +53,14 @@ public class KoboSQLite implements IKoboDatabase{
 			throw new KoboSQLException(e);
 		}
 	}
+	
+	public String toString(){
+		String version="Undefined";
+		try{
+			version=getVersion()+"";
+		}catch(Exception ex){}
+		return "Kobo Database Version: "+version;
+	}
 
 	public List<KoboBook> getCurrentReadings() throws KoboSQLException{
 		try{

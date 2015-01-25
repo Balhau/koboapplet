@@ -7,7 +7,7 @@ import java.util.Date;
  * @author <a href="mailto:balhau@balhau.net">Balhau</a>
  * <p>15 de Fev de 2014</p>
  */
-public class KoboAchievement {
+public class KoboAchievement implements BaseModel{
 	private String completeDescription;
 	private String eventLogDescription;
 	private String incompleteDescription;
@@ -80,6 +80,13 @@ public class KoboAchievement {
 	}
 	public void setUserID(String userID) {
 		this.userID = userID;
+	}
+	
+	public String toString(){
+		String out="ACHIEVEMENT[";
+		out+=name+", "+completeDescription+", "+percentComplete;
+		out+="]";
+		return out;
 	}
 	
 	

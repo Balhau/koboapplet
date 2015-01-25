@@ -6,7 +6,7 @@ package com.balhau.kobo.model;
  * @author <a href="mailto:balhau@balhau.net">Balhau</a>
  * <p>17 de Fev de 2014</p>
  */
-public class KoboBook {
+public class KoboBook implements BaseModel{
 	private String bookTitle;
 	private String bookID;
 	private int contentType;
@@ -73,6 +73,14 @@ public class KoboBook {
 
 	public void setDateLastRead(String dateLastRead) {
 		this.dateLastRead = dateLastRead;
+	}
+	
+	public String toString(){
+		String out="BOOK[";
+		out+=bookID+", "+bookTitle+", ";
+		out+=contentType+", "+dateLastRead+", "+percentageReaded;
+		out+="]";
+		return out;
 	}
 	
 	

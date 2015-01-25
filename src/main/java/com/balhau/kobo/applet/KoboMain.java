@@ -21,7 +21,7 @@ public class KoboMain extends Applet implements IKoboAPI{
 	 */
 	private static final long serialVersionUID = 1L;
 	private IKoboDatabase koboDatabase;
-	 private List<String> detectedDevices;
+	private List<String> detectedDevices;
 	 
 	 public void init(){
 		 try{

@@ -24,7 +24,7 @@ class KoboDatabaseTest extends Specification {
 		when:
 			List results=kdb.getAllBookNames()
 		then:
-			results.size()==677
+			results.size()==918
 	}
 	
 	def "Number of achievements on Kobo"(){
@@ -38,21 +38,21 @@ class KoboDatabaseTest extends Specification {
 		when:
 			int version=kdb.getVersion()
 		then:
-			version==92
+			version==109
 	}
 	
 	def "Get reading books IDs"(){
 		when:
 			List rb=kdb.getReadingBookIDs()
 		then:
-			rb.size()==94
+			rb.size()==351
 	}
 	
 	def "Get Book by Content ID"(){
 		when:
 			KoboBook book=kdb.getBookByContentID("file:///mnt/onboard/Davies, Joshua/Implementing SSL _ TLS Using Cryptography and PKI - Davies, Joshua.pdf")
 		then:
-			book.getPercentageReaded()==55;
+			book.getPercentageReaded()==99;
 			book.getBookTitle().equals("Implementing SSL / TLS Using Cryptography and PKI")
 			book.getContentType().equals(9)
 			book.getMimeType().equals("application/pdf")
@@ -67,10 +67,11 @@ class KoboDatabaseTest extends Specification {
 	
 	def "Get current readings"(){
 		when:
-			List books=kdb.getCurrentReadings()
+			List books=kdb.getReadingBookIDs()
 		then:
-			books.size()==94
+			books.size()==351
 	}
+	
 	
 	def "Check last date read from Ebook Entry"(){
 		when:
