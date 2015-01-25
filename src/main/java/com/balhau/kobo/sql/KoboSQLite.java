@@ -260,5 +260,26 @@ public class KoboSQLite implements IKoboDatabase{
 			throw new KoboSQLException(ex.getMessage());
 		}
 	}
+
+
+	@Override
+	public List<String> getBooksIds() throws KoboSQLException {
+		List<String> bookIds = new ArrayList<String>();
+		try{
+			ResultSet res=query("select distinct contentId from content");
+			String id;
+			while(res.next()){
+				id=res.getString(1);
+				if(id.indexOf("#")==-1){
+					bookIds.add(id);
+				}
+			}
+			return bookIds;
+		}catch(Exception ex){ throw new KoboSQLException(ex.getMessage());}
+	}
 	
+	private ResultSet query(String sqlQuery) throws Exception{
+		Statement st=conn.createStatement();
+		return st.executeQuery(sqlQuery);
+	}
 }

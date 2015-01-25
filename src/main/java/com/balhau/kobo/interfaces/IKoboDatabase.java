@@ -17,6 +17,7 @@ public interface IKoboDatabase {
 	public List<KoboBook> getCurrentReadings() throws KoboSQLException;
 	public List<String> getReadingBooksContentID() throws KoboSQLException;
 	public List<String> getReadingBookIDs() throws KoboSQLException;
+	public List<String> getBooksIds() throws KoboSQLException;
 	public KoboBook getBookByContentID(String contentID) throws KoboSQLException;
 	public List<KoboBook> getBooksByName(String name) throws KoboSQLException;
 	public List<KoboAchievement> getAchievements() throws KoboSQLException;

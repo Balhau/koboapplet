@@ -3,10 +3,14 @@ package com.balhau.kobo.tests
 import java.sql.ResultSet;
 import java.util.List;
 
+import org.junit.Assert;
+
 import spock.lang.*
 
 import com.balhau.kobo.device.DeviceUtils;
 import com.balhau.kobo.interfaces.IKoboDatabase
+import com.balhau.kobo.model.Bookmark;
+import com.balhau.kobo.model.KoboAchievement;
 import com.balhau.kobo.model.KoboBook;
 import com.balhau.kobo.sql.KoboSQLite
 
@@ -80,4 +84,26 @@ class KoboDatabaseTest extends Specification {
 			String lastread=book.getDateLastRead()
 			lastread.equals("2013-11-27T11:38:08Z");
 	}
+	
+	def "Get achievements"(){
+		when:
+			List<KoboAchievement> achievements=kdb.getAchievements();
+		then:
+			Assert.assertEquals(achievements.size(),27);
+	}
+	
+	def "Get Bookmarks"(){
+		when:
+			List<Bookmark> bookmarks = kdb.getBookmarks();
+		then:
+			Assert.assertEquals(bookmarks.size(),123);
+	}
+	
+	def "Get Books ids"(){
+		when:
+			List<String> bookIds=kdb.getBooksIds();
+		then:
+			Assert.assertEquals(bookIds.size(),1781);
+	}
 }
+

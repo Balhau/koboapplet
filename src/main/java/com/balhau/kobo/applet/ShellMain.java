@@ -33,13 +33,27 @@ public class ShellMain {
 			out.println(id);
 		});
 		
-		callOn(aux.getAchievements(),(KoboAchievement a) ->{
+		List<KoboAchievement> ach=aux.getAchievements();
+		
+		callOn(ach,(KoboAchievement a) ->{
 			out.println(a.toJson());
 		});
 		
-		callOn(aux.getBookmarks(),(Bookmark b) -> {
+		List<Bookmark> bmarks=aux.getBookmarks();
+		
+		callOn(bmarks,(Bookmark b) -> {
 			out.println(b.toJson());
 		});
+		
+		List<String> bids=aux.getBooksIds();
+		
+		callOn(bids,(String bookId) -> {
+			out.println(bookId);
+		});
+		
+		out.println("Achievments: "+ach.size());
+		out.println("Bookmarks: "+bmarks.size());
+		out.println("Book Ids: "+bids.size());
 		
 	}
 }
