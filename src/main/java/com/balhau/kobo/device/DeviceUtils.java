@@ -57,6 +57,7 @@ public class DeviceUtils {
 		while((aux=bf.readLine())!=null){
 			sb.append(aux);
 		}
+		bf.close();
 		return sb.toString();
 	}
 }

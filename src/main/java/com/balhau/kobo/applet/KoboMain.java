@@ -73,5 +73,9 @@ public class KoboMain extends Applet implements IKoboAPI{
 	public String getAchievements() throws KoboSQLException {
 		return exportJSON(koboDatabase.getAchievements());
 	}
+	
+	public String getBookmarks() throws KoboSQLException {
+		return exportJSON(koboDatabase.getBookmarks());
+	}
 
 } 

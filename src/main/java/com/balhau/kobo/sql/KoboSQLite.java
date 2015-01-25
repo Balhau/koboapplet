@@ -12,6 +12,7 @@ import java.util.List;
 import com.balhau.kobo.exceptions.KoboSQLException;
 import com.balhau.kobo.interfaces.IDBExporter;
 import com.balhau.kobo.interfaces.IKoboDatabase;
+import com.balhau.kobo.model.Bookmark;
 import com.balhau.kobo.model.KoboAchievement;
 import com.balhau.kobo.model.KoboBook;
 
@@ -219,6 +220,44 @@ public class KoboSQLite implements IKoboDatabase{
 			return kb;
 		}catch (Exception e) {
 			throw new KoboSQLException(e);
+		}
+	}
+	
+	public List<Bookmark> getBookmarks() throws KoboSQLException{
+		List<Bookmark> bookmarks = new ArrayList<Bookmark>();
+		try{
+			Statement st=conn.createStatement();
+			ResultSet rs=st.executeQuery("select * from Bookmark");
+			Bookmark aux;
+			while(rs.next()){
+				aux=new Bookmark();
+				aux.setId(rs.getString(1));
+				aux.setVolumeId(rs.getString(2));
+				aux.setContentId(rs.getString(3));
+				aux.setStartContainerPath(rs.getString(4));
+				aux.setStartContainerChildIndex(rs.getInt(5));
+				aux.setStartOffset(rs.getInt(6));
+				aux.setEndContainerPath(rs.getString(7));
+				aux.setEndContainerChildIndex(rs.getInt(8));
+				aux.setEndOffset(rs.getInt(9));
+				aux.setText(rs.getString(10));
+				aux.setAnnotation(rs.getString(11));
+				aux.setExtraAnnotation(rs.getString(12));
+				aux.setDateCreated(rs.getDate(13));
+				aux.setChapterProgress(rs.getDouble(14));
+				aux.setHidden(rs.getBoolean(15));
+				aux.setVersion(rs.getString(16));
+				aux.setDateModified(rs.getDate(17));
+				aux.setCreator(rs.getString(18));
+				aux.setUuid(rs.getString(19));
+				aux.setUserId(rs.getString(20));
+				aux.setSyncTime(rs.getDate(21));
+				aux.setPublished(rs.getBoolean(22));
+				bookmarks.add(aux);
+			}
+			return bookmarks;
+		}catch (Exception ex){
+			throw new KoboSQLException(ex.getMessage());
 		}
 	}
 	
