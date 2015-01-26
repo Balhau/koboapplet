@@ -63,5 +63,9 @@ public class ShellMain {
 		out.println("Book Ids: "+bids.size());
 		out.println("Ratings: "+ratings.size());
 		
+		KoboMain km=new KoboMain();
+		
+		out.println(km.api());
+		
 	}
 }

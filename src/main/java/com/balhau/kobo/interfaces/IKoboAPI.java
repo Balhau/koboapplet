@@ -1,6 +1,13 @@
 package com.balhau.kobo.interfaces;
 
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.balhau.kobo.exceptions.KoboSQLException;
+import com.google.gson.Gson;
 
 
 /**
@@ -9,6 +16,22 @@ import com.balhau.kobo.exceptions.KoboSQLException;
  * <p>15 de Fev de 2014</p>
  */
 public interface IKoboAPI {
+	
+	default String api(){
+		Method[] methods =IKoboAPI.class.getDeclaredMethods();
+		Map<String,List<String>> mNames=new HashMap<String,List<String>>();
+		List<String> aux;
+		for(Method m : methods){
+			Class<?>[] types=m.getParameterTypes();
+			aux=new ArrayList<String>();
+			for(Class<?> t : types){
+				aux.add(t.getName());
+			}
+			mNames.put(m.getName(), aux);
+		}
+		Gson g=new Gson();
+		return g.toJson(mNames);
+	}
 	
 	int getDatabaseVersion() throws KoboSQLException;
 	String getDetectedDevices() throws KoboSQLException;

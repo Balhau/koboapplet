@@ -1,25 +1,23 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8"?> 
+<jnlp spec="1.0+" codebase="http://shared.balhau.net/kobo/" href="koboapplet.jnlp">
 
-<jnlp spec="1.0+" codebase="target/" href="">
-    <information>
+<information>
         <title>Kobo Applet</title>
         <vendor>Balhau</vendor>
         <icon href="sometree-icon.jpg"/>
+	<homepage href="http://shared.balhau.net/kobo/" />
         <offline-allowed/>
-    </information>
-    <security>
-    	<all-permissions/>
-    </security>
-    <resources>
-        <!-- Application Resources -->
-        <j2se version="1.6+" href=
-           "http://java.sun.com/products/autodl/j2se"/>
-        <jar href="kobo-applet-0.1-SNAPSHOT.jar"/>
-
-    </resources>
-    <application-desc
+        </information>
+	<security>
+		<all-permissions/>
+	</security>
+	<resources>
+		<j2se version="1.8+" />
+		<jar href="target/kobo-applet-0.1-SNAPSHOT-jar-with-dependencies.jar" />
+	</resources>
+	<application-desc
          name="Kobo Applet Utility"
-         main-class="com.balhau.applet.kobo.KoboMain"
+         main-class="com.balhau.kobo.applet.KoboMain"
          width="300"
          height="300">
      </application-desc>
