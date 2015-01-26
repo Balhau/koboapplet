@@ -20,6 +20,23 @@ The functionalities that are exposed to JavaScript are those described in the in
     }
 
 
+You'll find another interface, **IKoboDatabase** , that holds the operations that are being done to the SQLite database. You should note that not all of the operations to the database are exposed in **IKoboAPI**. At the time of this writing these are the operations defined in the **IKoboDatabse** interface
+
+    public interface IKoboDatabase {
+    	public int getVersion() throws KoboSQLException;
+    	public List<KoboBook> getCurrentReadings() throws KoboSQLException;
+    	public List<String> getReadingBooksContentID() throws KoboSQLException;
+    	public List<String> getReadingBookIDs() throws KoboSQLException;
+    	public List<String> getBooksIds() throws KoboSQLException;
+    	public KoboBook getBookByContentID(String contentID) throws KoboSQLException;
+    	public List<KoboBook> getBooksByName(String name) throws KoboSQLException;
+    	public List<KoboAchievement> getAchievements() throws KoboSQLException;
+    	public void exportToDatabase(IDBExporter dbexporter) throws KoboSQLException;
+    	public List<Bookmark> getBookmarks() throws KoboSQLException;
+    	public List<Rating> getRatings() throws KoboSQLException;
+    }
+
+
 ###Note
 
 This code has features of Java 8 so you must download the latest version of the JDK from Oracle to build this code.
