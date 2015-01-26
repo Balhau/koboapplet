@@ -8,6 +8,9 @@ import com.balhau.kobo.device.DeviceUtils;
 import com.balhau.kobo.exceptions.KoboSQLException;
 import com.balhau.kobo.interfaces.IKoboAPI;
 import com.balhau.kobo.interfaces.IKoboDatabase;
+import com.balhau.kobo.model.Bookmark;
+import com.balhau.kobo.model.KoboAchievement;
+import com.balhau.kobo.model.KoboBook;
 import com.balhau.kobo.sql.KoboSQLite;
 import com.google.gson.Gson;
 
@@ -22,6 +25,7 @@ public class KoboMain extends Applet implements IKoboAPI{
 	private static final long serialVersionUID = 1L;
 	private IKoboDatabase koboDatabase;
 	private List<String> detectedDevices;
+	private String apiDesc;
 	 
 	 public void init(){
 		 try{
@@ -54,28 +58,28 @@ public class KoboMain extends Applet implements IKoboAPI{
 		return -1;
 	}
 
-	public String getDetectedDevices() {
-		return exportJSON(detectedDevices); 
+	public List<String> getDetectedDevices() {
+		return detectedDevices; 
 	}
 
-	public String getCurrentReadings() throws KoboSQLException{
-		return exportJSON(koboDatabase.getCurrentReadings());
+	public List<KoboBook> getCurrentReadings() throws KoboSQLException{
+		return koboDatabase.getCurrentReadings();
 	}
 
-	public String getCurrentReadingsIDs() throws KoboSQLException {
-		return exportJSON(koboDatabase.getReadingBookIDs());
+	public List<String> getCurrentReadingsIDs() throws KoboSQLException {
+		return koboDatabase.getReadingBookIDs();
 	}
 
-	public String getBookByContentID(String contentID) throws KoboSQLException{
-		return exportJSON(koboDatabase.getBookByContentID(contentID));
+	public KoboBook getBookByContentID(String contentID) throws KoboSQLException{
+		return koboDatabase.getBookByContentID(contentID);
 	}
 
-	public String getAchievements() throws KoboSQLException {
-		return exportJSON(koboDatabase.getAchievements());
+	public List<KoboAchievement> getAchievements() throws KoboSQLException {
+		return koboDatabase.getAchievements();
 	}
 	
-	public String getBookmarks() throws KoboSQLException {
-		return exportJSON(koboDatabase.getBookmarks());
+	public List<Bookmark> getBookmarks() throws KoboSQLException {
+		return koboDatabase.getBookmarks();
 	}
 
 } 
