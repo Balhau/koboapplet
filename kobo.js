@@ -54,7 +54,7 @@ Kobo.prototype.getDetectedDevices=function(){
 		out.push(dDev.get(i));
 	}
 	return out;
-}
+};
 
 Kobo.prototype.getAchievements=function(){
 	var out=[];
@@ -70,4 +70,24 @@ Kobo.prototype.getAchievements=function(){
 		);
 	}
 	return out;
-}
+};
+
+Kobo.prototype.getBookmarks=function(){
+	var out=[];
+	var oBMark=this.applet.getBookmarks();
+	var o=null;
+	for(var i=0;i<oBMark.size();i++){
+		o=oBMark.get(i);
+		out.push(
+			new Kobo.Bookmark(
+				o.getId(),o.getVolumeId(),o.getContentId(),o.getStartContainerPath(),
+				o.getStartOffset(),o.getStartContainerChildIndex(),o.getEndContainerPath(),
+				o.getEndContainerChildIndex(),o.getEndOffset(),o.getText(),o.getAnnotation(),
+				o.getExtraAnnotation(),o.getDateCreated(),o.getChapterProgress(),o.isHidden(),
+				o.getVersion(),o.getDateModified(),o.getCreator(),o.getUuid(),o.getUserId(),
+				o.getSyncTime(),o.isPublished()
+			)
+		);
+	}
+	return out;
+};
