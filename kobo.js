@@ -15,32 +15,15 @@ Kobo.Book=function(title,id,contentType,mimeType,percentageRead,dateLastRead){
 	this.mimeType=mimeType;
 	this.percentageRead=percentageRead;
 	this.dateLastRead=dateLastRead;
-}
+};
 
-/*
-private String id;
-private String volumeId;
-private String contentId;
-private String startContainerPath;
-private int startContainerChildIndex;
-private int startOffset;
-private String endContainerPath;
-private int endContainerChildIndex;
-private int endOffset;
-private String text;
-private String annotation;
-private String extraAnnotation;
-private String dateCreated;
-private double chapterProgress;
-private boolean hidden;
-private String version;
-private String dateModified;
-private String creator;
-private String uuid;
-private String userId;
-private String syncTime;
-private boolean published;
-*/
+Kobo.Achievement=function(completeDescription,eventLogDescription,incompleteDescription,dateCreated,imageId,name,percentComplete,userID){
+	this.completeDescription=completeDescription;this.eventLogDescription=eventLogDescription;
+	this.incompleteDescription=incompleteDescription;this.dateCreated=dateCreated;
+	this.imageId=imageId;this.name=name;this.percentComplete=percentComplete;
+	this.userID=userID;
+};
+
 
 Kobo.Bookmark=function(id,volumeId,contentId,startContainerPath,
 		startContainerChildIndex,startOffSet,endContainerPath,
@@ -58,8 +41,33 @@ Kobo.Bookmark=function(id,volumeId,contentId,startContainerPath,
 		this.dateCreated=dateCreated;this.chapterProgress=chapterProgress;this.hidden=hidden;
 		this.version=version;this.dateModified=dateModified;this.creator=creator;
 		this.uuid=uuid;this.userId=userId;this.syncTime=syncTime;this.published=published;
-}
+};
 
 Kobo.prototype.getDatabaseVersion=function(){
 	return this.applet.getDatabaseVersion();
+}
+
+Kobo.prototype.getDetectedDevices=function(){
+	var out=[];
+	var dDev=this.applet.getDetectedDevices();
+	for(var i=0;i<dDev.size();i++){
+		out.push(dDev.get(i));
+	}
+	return out;
+}
+
+Kobo.prototype.getAchievements=function(){
+	var out=[];
+	var oAch=this.applet.getAchievements();
+	var a;
+	for(var i=0;i<oAch.size();i++){
+		a=oAch.get(i);
+		out.push(
+			new Kobo.Achievement(
+				a.getCompleteDescription(),a.getEventLogDescription(),a.getIncompleteDescription(),
+				a.getDateCreated(),a.getImageId(),a.getName(),a.getPercentComplete(),a.getUserID()
+			)
+		);
+	}
+	return out;
 }
