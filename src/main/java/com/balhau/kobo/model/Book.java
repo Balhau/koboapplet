@@ -38,22 +38,6 @@ public class Book extends Content implements BaseModel{
 	public void setPercentageReaded(int percentageReaded) {
 		this.percentageReaded = percentageReaded;
 	}
-
-	public int getContentType() {
-		return contentType;
-	}
-
-	public void setContentType(int contentType) {
-		this.contentType = contentType;
-	}
-
-	public String getMimeType() {
-		return mimeType;
-	}
-
-	public void setMimeType(String mimeType) {
-		this.mimeType = mimeType;
-	}
 	
 	public String toString(){
 		String out="BOOK[";
