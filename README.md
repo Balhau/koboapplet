@@ -30,7 +30,7 @@ The functionalities that are exposed to JavaScript are those described in the in
     }
 
 
-You'll find another interface, **IKoboDatabase** , that holds the operations that are being done to the SQLite database. You should note that not all of the operations to the database are exposed in **IKoboAPI**. At the time of this writing these are the operations defined in the **IKoboDatabse** interface
+You'll find another interface, **IKoboDatabase** , that holds the operations that are being done to the SQLite database. You should note that not all of the operations to the database are exposed in **IKoboAPI**. At the time of this writing these are the operations defined in the **IKoboDatabase** interface
 
     public interface IKoboDatabase {
     	public int getVersion() throws KoboSQLException;
