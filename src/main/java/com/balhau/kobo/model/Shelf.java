@@ -22,8 +22,13 @@ public class Shelf implements BaseModel{
 	public Shelf(String creationDate,String id,String internalName,
 			String lastModified,String name,String type,boolean deleted,
 			boolean visible,boolean synced){
-		
+		this.creationDate=creationDate;this.id=id;
+		this.internalName=internalName;this.lastModified=lastModified;
+		this.name=name;this.type=type;this.deleted=deleted;
+		this.visible=visible;this.synced=synced;
 	}
+	
+	public Shelf(){}
 
 	public String getCreationDate() {
 		return creationDate;

@@ -7,6 +7,7 @@ import com.balhau.kobo.interfaces.IKoboDatabase;
 import com.balhau.kobo.model.Bookmark;
 import com.balhau.kobo.model.KoboAchievement;
 import com.balhau.kobo.model.Rating;
+import com.balhau.kobo.model.Shelf;
 import com.balhau.kobo.sql.KoboSQLite;
 
 import static java.lang.System.out;
@@ -56,6 +57,11 @@ public class ShellMain {
 		
 		callOn(ratings,(Rating r) -> {
 			out.println(r.toJson());
+		});
+		
+		List<Shelf> shelfs=aux.getShelfs();
+		callOn(shelfs, (Shelf s) -> {
+			out.println(s.toJson());
 		});
 		
 		out.println("Achievments: "+ach.size());

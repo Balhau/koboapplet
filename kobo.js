@@ -24,6 +24,11 @@ Kobo.Achievement=function(completeDescription,eventLogDescription,incompleteDesc
 	this.userID=userID;
 };
 
+Kobo.Rating=function(contentId,rating,review,dateModified){
+	this.contentId=contentId;this.rating=rating;this.review=review;
+	this.dateModified=dateModified;
+};
+
 
 Kobo.Bookmark=function(id,volumeId,contentId,startContainerPath,
 		startContainerChildIndex,startOffSet,endContainerPath,
@@ -76,7 +81,8 @@ Kobo.prototype.getBookmarks=function(){
 	var out=[];
 	var oBMark=this.applet.getBookmarks();
 	var o=null;
-	for(var i=0;i<oBMark.size();i++){
+	var l=oBMark.size();
+	for(var i=0;i<l;i++){
 		o=oBMark.get(i);
 		out.push(
 			new Kobo.Bookmark(
@@ -86,6 +92,30 @@ Kobo.prototype.getBookmarks=function(){
 				o.getExtraAnnotation(),o.getDateCreated(),o.getChapterProgress(),o.isHidden(),
 				o.getVersion(),o.getDateModified(),o.getCreator(),o.getUuid(),o.getUserId(),
 				o.getSyncTime(),o.isPublished()
+			)
+		);
+	}
+	return out;
+};
+
+/**
+ * private String contentId;
+	private int rating;
+	private String review;
+	private String dateModified;
+ */
+
+Kobo.prototype.getRatings=function(){
+	var out=[];
+	var oRat=this.applet.getRatings();
+	var o=null;
+	var l=oRat.size();
+	for(var i=0;i<l;i++){
+		o=oRat.get(i);
+		out.push(
+			new Kobo.Rating(
+				o.getContentId(),o.getRating(),
+				o.getReview(),o.getDateModified()
 			)
 		);
 	}

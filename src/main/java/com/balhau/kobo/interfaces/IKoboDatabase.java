@@ -7,6 +7,7 @@ import com.balhau.kobo.model.Bookmark;
 import com.balhau.kobo.model.KoboAchievement;
 import com.balhau.kobo.model.KoboBook;
 import com.balhau.kobo.model.Rating;
+import com.balhau.kobo.model.Shelf;
 
 /**
  * Interface that all KoboDatabase implementations should respect
@@ -30,4 +31,5 @@ public interface IKoboDatabase {
 	 */
 	public List<Bookmark> getBookmarks() throws KoboSQLException;
 	public List<Rating> getRatings() throws KoboSQLException;
+	public List<Shelf> getShelfs() throws KoboSQLException;
 }

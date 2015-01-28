@@ -16,6 +16,7 @@ import com.balhau.kobo.model.Bookmark;
 import com.balhau.kobo.model.KoboAchievement;
 import com.balhau.kobo.model.KoboBook;
 import com.balhau.kobo.model.Rating;
+import com.balhau.kobo.model.Shelf;
 
 /**
  * Implementation of {@link IKoboDatabase}. This is a implementation to kobo sqlite database
@@ -298,11 +299,25 @@ public class KoboSQLite implements IKoboDatabase{
 			return ratings;
 		}catch(Exception ex){throw new KoboSQLException(ex.getMessage());}
 	}
+	
+	@Override
+	public List<Shelf> getShelfs() throws KoboSQLException {
+		List<Shelf> shelfs=new ArrayList<Shelf>();
+		try{
+			ResultSet res = query("select * from Shelf");
+			while(res.next()){
+				shelfs.add(new Shelf(res.getString(1), 
+						res.getString(2), res.getString(3), res.getString(4), res.getString(5), 
+						res.getString(6), res.getBoolean(7), res.getBoolean(8), res.getBoolean(9)));
+			}
+		}catch(Exception ex){throw new KoboSQLException(ex.getMessage());}
+		return shelfs;
+	}
 
 
 	private ResultSet query(String sqlQuery) throws Exception{
 		Statement st=conn.createStatement();
 		return st.executeQuery(sqlQuery);
-	}
+	}	
 	
 }

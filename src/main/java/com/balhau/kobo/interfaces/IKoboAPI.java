@@ -11,6 +11,7 @@ import com.balhau.kobo.exceptions.KoboSQLException;
 import com.balhau.kobo.model.Bookmark;
 import com.balhau.kobo.model.KoboAchievement;
 import com.balhau.kobo.model.KoboBook;
+import com.balhau.kobo.model.Rating;
 import com.google.gson.Gson;
 
 
@@ -44,4 +45,5 @@ public interface IKoboAPI {
 	KoboBook getBookByContentID(String contentID) throws KoboSQLException;
 	List<KoboAchievement> getAchievements() throws KoboSQLException;
 	List<Bookmark> getBookmarks() throws KoboSQLException;
+	List<Rating> getRatings() throws KoboSQLException;
 }

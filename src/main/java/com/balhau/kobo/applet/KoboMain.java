@@ -11,6 +11,7 @@ import com.balhau.kobo.interfaces.IKoboDatabase;
 import com.balhau.kobo.model.Bookmark;
 import com.balhau.kobo.model.KoboAchievement;
 import com.balhau.kobo.model.KoboBook;
+import com.balhau.kobo.model.Rating;
 import com.balhau.kobo.sql.KoboSQLite;
 import com.google.gson.Gson;
 
@@ -80,6 +81,11 @@ public class KoboMain extends Applet implements IKoboAPI{
 	
 	public List<Bookmark> getBookmarks() throws KoboSQLException {
 		return koboDatabase.getBookmarks();
+	}
+
+	@Override
+	public List<Rating> getRatings() throws KoboSQLException {
+		return koboDatabase.getRatings();
 	}
 
 } 
