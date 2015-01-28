@@ -1,6 +1,5 @@
 package com.balhau.kobo.model;
 
-import java.util.Date;
 
 public class Rating implements BaseModel{
 	private String contentId;

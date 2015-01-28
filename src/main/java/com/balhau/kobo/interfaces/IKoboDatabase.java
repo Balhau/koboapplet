@@ -4,8 +4,9 @@ import java.util.List;
 
 import com.balhau.kobo.exceptions.KoboSQLException;
 import com.balhau.kobo.model.Bookmark;
-import com.balhau.kobo.model.KoboAchievement;
-import com.balhau.kobo.model.KoboBook;
+import com.balhau.kobo.model.Achievement;
+import com.balhau.kobo.model.Book;
+import com.balhau.kobo.model.PocketArticle;
 import com.balhau.kobo.model.Rating;
 import com.balhau.kobo.model.Shelf;
 
@@ -16,13 +17,13 @@ import com.balhau.kobo.model.Shelf;
  */
 public interface IKoboDatabase {
 	public int getVersion() throws KoboSQLException;
-	public List<KoboBook> getCurrentReadings() throws KoboSQLException;
+	public List<Book> getCurrentReadings() throws KoboSQLException;
 	public List<String> getReadingBooksContentID() throws KoboSQLException;
 	public List<String> getReadingBookIDs() throws KoboSQLException;
 	public List<String> getBooksIds() throws KoboSQLException;
-	public KoboBook getBookByContentID(String contentID) throws KoboSQLException;
-	public List<KoboBook> getBooksByName(String name) throws KoboSQLException;
-	public List<KoboAchievement> getAchievements() throws KoboSQLException;
+	public Book getBookByContentID(String contentID) throws KoboSQLException;
+	public List<Book> getBooksByName(String name) throws KoboSQLException;
+	public List<Achievement> getAchievements() throws KoboSQLException;
 	public void exportToDatabase(IDBExporter dbexporter) throws KoboSQLException;
 	/**
 	 * Returns all the bookmarks in the Kobo database
@@ -32,4 +33,5 @@ public interface IKoboDatabase {
 	public List<Bookmark> getBookmarks() throws KoboSQLException;
 	public List<Rating> getRatings() throws KoboSQLException;
 	public List<Shelf> getShelfs() throws KoboSQLException;
+	public List<PocketArticle> getPocketArticles() throws KoboSQLException;
 }

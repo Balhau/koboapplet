@@ -1,13 +1,13 @@
 package com.balhau.kobo.model;
 
-import java.util.Date;
+
 
 /**
  * This is a wrapper arround a achivement table on kobo storage data. This will encapsulate the data that we consider meaningfull around the concept Achievement
  * @author <a href="mailto:balhau@balhau.net">Balhau</a>
  * <p>15 de Fev de 2014</p>
  */
-public class KoboAchievement implements BaseModel{
+public class Achievement implements BaseModel{
 	private String completeDescription;
 	private String eventLogDescription;
 	private String incompleteDescription;
@@ -19,7 +19,7 @@ public class KoboAchievement implements BaseModel{
 	
 	
 	
-	public KoboAchievement(String completeDescription,
+	public Achievement(String completeDescription,
 			String eventLogDescription, String incompleteDescription,
 			String dateCreated, String imageId, String name, int percentComplete,
 			String userID) {

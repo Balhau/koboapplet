@@ -1,6 +1,5 @@
 package com.balhau.kobo.utils.functionals;
 
-import java.util.List;
 
 @FunctionalInterface
 public interface Unzip<T,U> {

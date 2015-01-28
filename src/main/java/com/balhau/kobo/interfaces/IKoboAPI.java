@@ -1,6 +1,5 @@
 package com.balhau.kobo.interfaces;
 
-import java.awt.print.Book;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,8 +8,9 @@ import java.util.Map;
 
 import com.balhau.kobo.exceptions.KoboSQLException;
 import com.balhau.kobo.model.Bookmark;
-import com.balhau.kobo.model.KoboAchievement;
-import com.balhau.kobo.model.KoboBook;
+import com.balhau.kobo.model.Achievement;
+import com.balhau.kobo.model.Book;
+import com.balhau.kobo.model.PocketArticle;
 import com.balhau.kobo.model.Rating;
 import com.google.gson.Gson;
 
@@ -40,10 +40,11 @@ public interface IKoboAPI {
 	
 	int getDatabaseVersion() throws KoboSQLException;
 	List<String> getDetectedDevices() throws KoboSQLException;
-	List<KoboBook> getCurrentReadings() throws KoboSQLException;
+	List<Book> getCurrentReadings() throws KoboSQLException;
 	List<String> getCurrentReadingsIDs() throws KoboSQLException;
-	KoboBook getBookByContentID(String contentID) throws KoboSQLException;
-	List<KoboAchievement> getAchievements() throws KoboSQLException;
+	Book getBookByContentID(String contentID) throws KoboSQLException;
+	List<Achievement> getAchievements() throws KoboSQLException;
 	List<Bookmark> getBookmarks() throws KoboSQLException;
 	List<Rating> getRatings() throws KoboSQLException;
+	List<PocketArticle> getPocketArticles() throws KoboSQLException;
 }

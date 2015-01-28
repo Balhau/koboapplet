@@ -1,6 +1,5 @@
 package com.balhau.kobo.model;
 
-import java.util.Date;
 
 /**
  * Shelf dao for kobo database

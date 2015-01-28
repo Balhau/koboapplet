@@ -13,8 +13,9 @@ import com.balhau.kobo.exceptions.KoboSQLException;
 import com.balhau.kobo.interfaces.IDBExporter;
 import com.balhau.kobo.interfaces.IKoboDatabase;
 import com.balhau.kobo.model.Bookmark;
-import com.balhau.kobo.model.KoboAchievement;
-import com.balhau.kobo.model.KoboBook;
+import com.balhau.kobo.model.Achievement;
+import com.balhau.kobo.model.Book;
+import com.balhau.kobo.model.PocketArticle;
 import com.balhau.kobo.model.Rating;
 import com.balhau.kobo.model.Shelf;
 
@@ -65,9 +66,9 @@ public class KoboSQLite implements IKoboDatabase{
 		return "Kobo Database Version: "+version;
 	}
 
-	public List<KoboBook> getCurrentReadings() throws KoboSQLException{
+	public List<Book> getCurrentReadings() throws KoboSQLException{
 		try{
-			ArrayList<KoboBook> res=new ArrayList<KoboBook>();
+			ArrayList<Book> res=new ArrayList<Book>();
 			List<String> rIDS=getReadingBookIDs();
 			for(String cid : rIDS){
 				res.add(getBookByContentID(cid));
@@ -109,13 +110,13 @@ public class KoboSQLite implements IKoboDatabase{
 	}
 
 
-	public List<KoboAchievement> getAchievements() throws KoboSQLException {
+	public List<Achievement> getAchievements() throws KoboSQLException {
 		try{
 			Statement st=conn.createStatement();
-			List<KoboAchievement> achievements=new ArrayList<KoboAchievement>();
+			List<Achievement> achievements=new ArrayList<Achievement>();
 			ResultSet rs=st.executeQuery("select CompleteDescription, EventLogDescription,IncompleteDescription,DateCreated,ImageId,Name,PercentComplete,UserId from Achievement;");
 			while(rs.next()){
-				achievements.add(new KoboAchievement(
+				achievements.add(new Achievement(
 						rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), 
 						rs.getString(6), rs.getInt(7), rs.getString(8)));
 			}
@@ -170,7 +171,7 @@ public class KoboSQLite implements IKoboDatabase{
 		return 0;
 	}
 	
-	private void infoKoboBook(String contentID,KoboBook book) throws KoboSQLException{
+	private void infoKoboBook(String contentID,Book book) throws KoboSQLException{
 		try{
 			PreparedStatement pst=conn.prepareStatement("select * from content where contentID like ? and BookTitle <>''");
 			String lq="%"+contentID+"%";
@@ -192,11 +193,11 @@ public class KoboSQLite implements IKoboDatabase{
 		}
 	}
 
-	public KoboBook getBookByContentID(String contentID) throws KoboSQLException {
+	public Book getBookByContentID(String contentID) throws KoboSQLException {
 		try{
-			KoboBook kb=new KoboBook();
+			Book kb=new Book();
 			kb.setPercentageReaded(percentReadByContentID(contentID));
-			kb.setBookID(contentID);
+			kb.setContentID(contentID);
 			kb.setBookTitle(getBookTitleByContentID(contentID));
 			infoKoboBook(contentID, kb);
 			return kb;
@@ -206,12 +207,12 @@ public class KoboSQLite implements IKoboDatabase{
 	}
 
 
-	public List<KoboBook> getBooksByName(String name) throws KoboSQLException {
+	public List<Book> getBooksByName(String name) throws KoboSQLException {
 		try{
 			PreparedStatement pst=conn.prepareStatement("select contentID,BookTitle from content where BookTitle like ? group by BookTitle;");
 			pst.setString(1, "%"+name+"%");
 			ResultSet rs=pst.executeQuery();
-			List<KoboBook> kb=new ArrayList<KoboBook>();
+			List<Book> kb=new ArrayList<Book>();
 			List<String> ids=new ArrayList<String>();
 			while(rs.next()){
 				ids.add(rs.getString(1));
@@ -224,6 +225,7 @@ public class KoboSQLite implements IKoboDatabase{
 			throw new KoboSQLException(e);
 		}
 	}
+	
 	
 	public List<Bookmark> getBookmarks() throws KoboSQLException{
 		List<Bookmark> bookmarks = new ArrayList<Bookmark>();
@@ -312,6 +314,28 @@ public class KoboSQLite implements IKoboDatabase{
 			}
 		}catch(Exception ex){throw new KoboSQLException(ex.getMessage());}
 		return shelfs;
+	}
+	
+
+	@Override
+	public List<PocketArticle> getPocketArticles() throws KoboSQLException {
+		List<PocketArticle> articles=new ArrayList<PocketArticle>();
+		PocketArticle a;
+		try{
+			ResultSet res=query("select * from content where PocketStatus <>  0");
+			while(res.next()){
+				a=new PocketArticle();
+				a.setContentID(res.getString(1));a.setContentType(res.getInt(2));
+				a.setMimeType(res.getString(2)); a.setTitle(res.getString(7));
+				a.setAttribution(res.getString(8)); a.setDescription(res.getString(9));
+				a.setDateLastRead(res.getString(15));a.setReadStatus(res.getInt(23));
+				a.setFileSize(res.getInt(28));a.setContentURL(res.getString(33));
+				a.setWordCount(res.getInt(53));a.setPocketStatus(res.getInt(58));
+				a.setImageURL(res.getString(60));a.setDateAdded(res.getString(61));
+				articles.add(a);
+			}
+		}catch(Exception ex){throw new KoboSQLException(ex.getMessage());}
+		return articles;
 	}
 
 

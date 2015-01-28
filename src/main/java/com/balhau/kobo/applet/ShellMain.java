@@ -5,7 +5,7 @@ import java.util.List;
 import com.balhau.kobo.device.DeviceUtils;
 import com.balhau.kobo.interfaces.IKoboDatabase;
 import com.balhau.kobo.model.Bookmark;
-import com.balhau.kobo.model.KoboAchievement;
+import com.balhau.kobo.model.Achievement;
 import com.balhau.kobo.model.Rating;
 import com.balhau.kobo.model.Shelf;
 import com.balhau.kobo.sql.KoboSQLite;
@@ -35,9 +35,9 @@ public class ShellMain {
 			out.println(id);
 		});
 		
-		List<KoboAchievement> ach=aux.getAchievements();
+		List<Achievement> ach=aux.getAchievements();
 		
-		callOn(ach,(KoboAchievement a) ->{
+		callOn(ach,(Achievement a) ->{
 			out.println(a.toJson());
 		});
 		

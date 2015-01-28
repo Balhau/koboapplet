@@ -6,25 +6,21 @@ package com.balhau.kobo.model;
  * @author <a href="mailto:balhau@balhau.net">Balhau</a>
  * <p>17 de Fev de 2014</p>
  */
-public class KoboBook implements BaseModel{
-	private String bookTitle;
-	private String bookID;
-	private int contentType;
-	private String mimeType;
-	private int percentageReaded;
-	private String dateLastRead;
+public class Book extends Content implements BaseModel{
 	
-	public KoboBook(){
+	private String bookTitle;
+	private int percentageReaded;
+	
+	public Book(){
 		
 	}
 
-	public KoboBook(String bookTitle, String bookID,int contentType,String mimeType,int percentageReaded) {
+	public Book(String bookTitle, String bookID,int contentType,String mimeType,int percentageReaded) {
 		this.bookTitle = bookTitle;
-		this.bookID = bookID;
+		this.contentID = bookID;
 		this.contentType=contentType;
 		this.mimeType=mimeType;
 		this.percentageReaded=percentageReaded;
-		this.setDateLastRead(null);
 	}
 
 	public String getBookTitle() {
@@ -33,14 +29,6 @@ public class KoboBook implements BaseModel{
 
 	public void setBookTitle(String bookTitle) {
 		this.bookTitle = bookTitle;
-	}
-
-	public String getBookID() {
-		return bookID;
-	}
-
-	public void setBookID(String bookID) {
-		this.bookID = bookID;
 	}
 
 	public int getPercentageReaded() {
@@ -66,18 +54,10 @@ public class KoboBook implements BaseModel{
 	public void setMimeType(String mimeType) {
 		this.mimeType = mimeType;
 	}
-
-	public String getDateLastRead() {
-		return dateLastRead;
-	}
-
-	public void setDateLastRead(String dateLastRead) {
-		this.dateLastRead = dateLastRead;
-	}
 	
 	public String toString(){
 		String out="BOOK[";
-		out+=bookID+", "+bookTitle+", ";
+		out+=contentID+", "+bookTitle+", ";
 		out+=contentType+", "+dateLastRead+", "+percentageReaded;
 		out+="]";
 		return out;
