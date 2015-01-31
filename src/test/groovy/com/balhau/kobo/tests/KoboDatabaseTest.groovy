@@ -10,8 +10,8 @@ import spock.lang.*
 import com.balhau.kobo.device.DeviceUtils;
 import com.balhau.kobo.interfaces.IKoboDatabase
 import com.balhau.kobo.model.Bookmark;
-import com.balhau.kobo.model.KoboAchievement;
-import com.balhau.kobo.model.KoboBook;
+import com.balhau.kobo.model.Achievement;
+import com.balhau.kobo.model.Book;
 import com.balhau.kobo.model.Rating;
 import com.balhau.kobo.sql.KoboSQLite
 
@@ -55,7 +55,7 @@ class KoboDatabaseTest extends Specification {
 	
 	def "Get Book by Content ID"(){
 		when:
-			KoboBook book=kdb.getBookByContentID("file:///mnt/onboard/Davies, Joshua/Implementing SSL _ TLS Using Cryptography and PKI - Davies, Joshua.pdf")
+			Book book=kdb.getBookByContentID("file:///mnt/onboard/Davies, Joshua/Implementing SSL _ TLS Using Cryptography and PKI - Davies, Joshua.pdf")
 		then:
 			book.getPercentageReaded()==99;
 			book.getBookTitle().equals("Implementing SSL / TLS Using Cryptography and PKI")
@@ -80,7 +80,7 @@ class KoboDatabaseTest extends Specification {
 	
 	def "Check last date read from Ebook Entry"(){
 		when:
-			KoboBook book=kdb.getBookByContentID(concurencyBook)
+			Book book=kdb.getBookByContentID(concurencyBook)
 		then:
 			String lastread=book.getDateLastRead()
 			lastread.equals("2013-11-27T11:38:08Z");
@@ -88,7 +88,7 @@ class KoboDatabaseTest extends Specification {
 	
 	def "Get achievements"(){
 		when:
-			List<KoboAchievement> achievements=kdb.getAchievements();
+			List<Achievement> achievements=kdb.getAchievements();
 		then:
 			Assert.assertEquals(achievements.size(),27);
 	}
