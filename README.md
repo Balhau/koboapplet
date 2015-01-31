@@ -126,6 +126,7 @@ To run the shell demo code with your own database you can change the line
 		koboDatabase=new KoboSQLite(DeviceUtils.getSQLitePathFromKoboPath(ldv.get(0)));
 		
 into something like this
+
 		koboDatabase=new KoboSQLite("path_to_sqlite_database");
 		
 Compile the code by running, skip the tests because they currently use a specific database file. This will be changed in the future
